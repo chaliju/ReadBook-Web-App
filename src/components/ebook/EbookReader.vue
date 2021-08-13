@@ -49,14 +49,7 @@ export default {
       this.setMenuVisible(!this.menuVisible)
       this.setFontFamilyVisible(false)
     },
-    // 解决翻页后菜单栏和标题栏依然显示的问题
-    hideTitleAndMenu() {
-      // this.$store.dispatch('setMenuVisible', false)
-      // 将book.js中的actions抽取到actions.js中
-      this.setMenuVisible(false)
-      this.setSettingVisible(-1)
-      this.setFontFamilyVisible(false)
-    },
+
     initFontSize() {
       // 获取字号
       let fontSize = getFontSize(this.fileName)
@@ -102,7 +95,7 @@ export default {
         this.initFontFamily()
         this.initGlobalStyle()
       })
-      
+
       this.rendition.hooks.content.register(contents => {
         Promise.all([
           contents.addStylesheet(`${process.env.VUE_APP_RES_URL}/fonts/daysOne.css`),
@@ -135,6 +128,19 @@ export default {
         event.stopPropagation()
       })
     },
+    // 获取封面的图片链接
+    parseBook() {
+      // 获取封面信息
+      this.book.loaded.cover.then(cover => {
+        this.book.archive.createUrl(cover).then(url=>{
+          this.setCover(url)
+        })
+      })
+      // 获取标题和作者信息
+      this.book.loaded.metadata.then(metadata=>{
+        this.setMetadata(metadata)
+      })
+    },
     // 1.阅读器解析和渲染
     initEpub() {
       const url = process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub'
@@ -142,6 +148,7 @@ export default {
       this.setCurrentBook(this.book)
       this.initRendition()
       this.initGesture()
+      this.parseBook()
       // 分页
       this.book.ready.then(() => {
         // 分页算法 -> 但是这种方法不太准确

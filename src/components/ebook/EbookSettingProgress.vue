@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import { getReadTime } from '../../utils/localStorage'
 import { ebookMixin } from '../../utils/mixin'
 
 export default {
@@ -46,7 +45,7 @@ export default {
     getSectionName() {
       if (this.section) {
         const sectionInfo = this.currentBook.section(this.section)
-        if (sectionInfo && sectionInfo.href) {
+        if (sectionInfo && sectionInfo.href &&this.currentBook &&this.currentBook.navigation) {
           return this.currentBook.navigation.get(sectionInfo.href).label
         }
       }
@@ -89,17 +88,6 @@ export default {
       const sectionInfo = this.currentBook.section(this.section)
       if (sectionInfo && sectionInfo.href) {
         this.display(sectionInfo.href)
-      }
-    },
-    getReadTimeText() {
-      return this.$t('book.haveRead').replace('$1', this.getReadTimeByMinute())
-    },
-    getReadTimeByMinute() {
-      const readTime = getReadTime(this.fileName)
-      if (!readTime) {
-        return 0
-      } else {
-        return Math.ceil(readTime / 60)
       }
     }
   },

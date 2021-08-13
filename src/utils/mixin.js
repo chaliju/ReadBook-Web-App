@@ -5,7 +5,8 @@ import {
 import {
   themeList,
   addCss,
-  removeAllCss
+  removeAllCss,
+  getReadTimeByMinute
 } from './book'
 import {
   saveLocation
@@ -100,6 +101,17 @@ export const ebookMixin = {
           if (cb) cb()
         })
       }
+    },
+    // 解决翻页后菜单栏和标题栏依然显示的问题
+    hideTitleAndMenu() {
+      // this.$store.dispatch('setMenuVisible', false)
+      // 将book.js中的actions抽取到actions.js中
+      this.setMenuVisible(false)
+      this.setSettingVisible(-1)
+      this.setFontFamilyVisible(false)
+    },
+    getReadTimeText() {
+      return this.$t('book.haveRead').replace('$1', getReadTimeByMinute(this.fileName))
     }
   }
 }
