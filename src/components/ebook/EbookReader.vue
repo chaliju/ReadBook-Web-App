@@ -17,6 +17,7 @@ import {
   saveTheme,
   getLocation
 } from '../../utils/localStorage'
+import { flatten } from '../../utils/book'
 
 global.ePub = Epub
 export default {
@@ -132,13 +133,24 @@ export default {
     parseBook() {
       // 获取封面信息
       this.book.loaded.cover.then(cover => {
-        this.book.archive.createUrl(cover).then(url=>{
+        this.book.archive.createUrl(cover).then(url => {
           this.setCover(url)
         })
       })
       // 获取标题和作者信息
-      this.book.loaded.metadata.then(metadata=>{
+      this.book.loaded.metadata.then(metadata => {
         this.setMetadata(metadata)
+      })
+      // 获取目录
+      this.book.loaded.navigation.then(nav => {
+        const navItem = flatten(nav.toc);
+        function find(item, level = 0) {
+          return !item.parent ? level : find(navItem.filter(parentItem => parentItem.id === item.parent)[0], ++level)
+        }
+        navItem.forEach(item => {
+          item.level = find(item)
+        })
+        this.setNavigation(navItem)
       })
     },
     // 1.阅读器解析和渲染

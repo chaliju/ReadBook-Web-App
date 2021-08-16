@@ -43,12 +43,14 @@ export default {
   mixins: [ebookMixin],
   computed: {
     getSectionName() {
-      if (this.section) {
-        const sectionInfo = this.currentBook.section(this.section)
-        if (sectionInfo && sectionInfo.href &&this.currentBook &&this.currentBook.navigation) {
-          return this.currentBook.navigation.get(sectionInfo.href).label
-        }
-      }
+      // if (this.section) {
+      //   const sectionInfo = this.currentBook.section(this.section)
+      //   if (sectionInfo && sectionInfo.href &&this.currentBook &&this.currentBook.navigation) {
+      //     return this.currentBook.navigation.get(sectionInfo.href).label
+      //   }
+      // }
+      // 上面的方法章节目录不能正确显示，且切换很快时会报错
+      return this.section ? this.navigation[this.section].label : ''
     }
   },
   methods: {
