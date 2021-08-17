@@ -53,5 +53,6 @@ html,body{
   user-select: none;
   overflow: hidden;
   font-family: 'PingFangSC-Light', 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', 'Arial', 'sans-serif';
+  // 在移动端触碰屏幕时高亮显示的颜色
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }

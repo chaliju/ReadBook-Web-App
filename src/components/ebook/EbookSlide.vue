@@ -33,19 +33,20 @@
 <script>
 import { ebookMixin } from '../../utils/mixin'
 import EbookSlideContents from './EbookSlideContents.vue'
+import EbookSlideBookmark from './EbookSlideBookmark'
 import EbookLoading from './EbookLoading.vue'
 
 export default {
   name: 'EbookSlide',
   mixins: [ebookMixin],
-  components:{
+  components: {
     EbookLoading
   },
   data() {
     return {
       currentTab: 1,
       content: EbookSlideContents,
-      bookmark: null
+      bookmark: EbookSlideBookmark
     }
   },
   methods: {
@@ -92,7 +93,7 @@ export default {
         }
       }
     }
-    .content-empty{
+    .content-empty {
       width: 100%;
       height: 100%;
       @include center;

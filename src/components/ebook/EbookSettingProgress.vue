@@ -41,18 +41,6 @@ import { ebookMixin } from '../../utils/mixin'
 export default {
   name: 'EbookSettingProgress',
   mixins: [ebookMixin],
-  computed: {
-    getSectionName() {
-      // if (this.section) {
-      //   const sectionInfo = this.currentBook.section(this.section)
-      //   if (sectionInfo && sectionInfo.href &&this.currentBook &&this.currentBook.navigation) {
-      //     return this.currentBook.navigation.get(sectionInfo.href).label
-      //   }
-      // }
-      // 上面的方法章节目录不能正确显示，且切换很快时会报错
-      return this.section ? this.navigation[this.section].label : ''
-    }
-  },
   methods: {
     onProgressChange(progress) {
       this.setProgress(progress).then(() => {
@@ -105,7 +93,7 @@ export default {
   position: absolute;
   bottom: px2rem(48);
   left: 0;
-  z-index: 101;
+  z-index: 159;
   width: 100%;
   height: px2rem(90);
   background: white;
