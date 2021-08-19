@@ -13,6 +13,32 @@ import {
   saveLocation
 } from './localStorage'
 
+export const storeHomeMixin = {
+  computed: {
+    ...mapGetters([
+      'offsetY',
+      'hotSearchOffsetY',
+      'flapCardVisible'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'setOffsetY',
+      'setHotSearchOffsetY',
+      'setFlapCardVisible'
+    ]),
+    showBookDetail(book) {
+      this.$router.push({
+        path: '/store/detail',
+        query: {
+          fileName: book.fileName,
+          category: book.categoryText
+        }
+      })
+    }
+  }
+}
+
 export const ebookMixin = {
   computed: {
     ...mapGetters([
@@ -109,6 +135,17 @@ export const ebookMixin = {
           }
         } else {
           this.setIsBookmark(false)
+        }
+        if (this.pagelist) {
+          const totalPage = this.pagelist.length
+          const currentPage = currentLocation.start.location
+          if (currentPage && currentPage > 0) {
+            this.setPaginate(currentPage + ' / ' + totalPage)
+          } else {
+            this.setPaginate('')
+          }
+        } else {
+          this.setPaginate('')
         }
       }
     },
