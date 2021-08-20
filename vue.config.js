@@ -10,7 +10,7 @@ const listData = require('./src/mock/bookList')
 const flatListData = require('./src/mock/bookFlatList')
 
 module.exports = {
-  baseUrl: process.env.NODE_ENV === 'production' ?
+  publicPath: process.env.NODE_ENV === 'production' ?
     './' : '/',
   devServer: {
     before(app) {

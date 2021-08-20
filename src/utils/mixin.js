@@ -13,6 +13,31 @@ import {
   saveLocation
 } from './localStorage'
 
+export const storeShelfMixin = {
+  computed: {
+    ...mapGetters([
+      'isEditMode',
+      'shelfList',
+      'shelfSelected',
+      'shelfTitleVisible',
+      'offsetY',
+      'shelfCategory',
+      'currentType'
+    ])
+  },
+  methods: {
+    ...mapActions([
+      'setIsEditMode',
+      'setShelfList',
+      'setShelfSelected',
+      'setShelfTitleVisible',
+      'setOffsetY',
+      'setShelfCategory',
+      'setCurrentType'
+    ])
+  }
+}
+
 export const storeHomeMixin = {
   computed: {
     ...mapGetters([

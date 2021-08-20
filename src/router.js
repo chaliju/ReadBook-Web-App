@@ -19,8 +19,13 @@ export default new Router({
     {
       path: '/store',
       component: () => import('./views/store/index.vue'),
-      redirect: '/store/home',
-      children: [{
+      redirect: '/store/shelf',
+      children: [
+        {
+          path:'shelf',
+          component: () => import('./views/store/StoreShelf.vue')
+        },
+        {
           path: 'home',
           component: () => import('./views/store/StoreHome.vue')
         },
