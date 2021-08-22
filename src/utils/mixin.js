@@ -12,6 +12,9 @@ import {
   getBookmark,
   saveLocation
 } from './localStorage'
+import {
+  gotoBookDetail
+} from './store'
 
 export const storeShelfMixin = {
   computed: {
@@ -34,7 +37,10 @@ export const storeShelfMixin = {
       'setOffsetY',
       'setShelfCategory',
       'setCurrentType'
-    ])
+    ]),
+    showBookDetail(book) {
+      gotoBookDetail(this, book)
+    }
   }
 }
 
@@ -53,13 +59,7 @@ export const storeHomeMixin = {
       'setFlapCardVisible'
     ]),
     showBookDetail(book) {
-      this.$router.push({
-        path: '/store/detail',
-        query: {
-          fileName: book.fileName,
-          category: book.categoryText
-        }
-      })
+      gotoBookDetail(this, book)
     }
   }
 }
