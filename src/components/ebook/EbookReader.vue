@@ -27,6 +27,7 @@ import {
   getLocation
 } from '../../utils/localStorage'
 import { flatten } from '../../utils/book'
+import { getLocalForage } from '../../utils/localForage'
 
 global.ePub = Epub
 export default {
@@ -236,8 +237,8 @@ export default {
       })
     },
     // 1.阅读器解析和渲染
-    initEpub() {
-      const url = process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub'
+    initEpub(url) {
+
       this.book = new Epub(url)
       this.setCurrentBook(this.book)
       this.initRendition()
@@ -255,7 +256,7 @@ export default {
           const loc = item.match(/\[(.*)\]!/)[1]
           this.navigation.forEach(nav => {
             if (nav.href) {
-              const href = nav.href.match(/^(.*)\.html$/)[1]
+              const href = nav.href.match(/^(.*)\.html$/)
               if (href) {
                 if (href === loc) {
                   nav.pagelist.push(item)
@@ -280,9 +281,21 @@ export default {
     }
   },
   mounted() {
-    const fileName = this.$route.params.fileName.split("|").join("/")
-    this.setFileName(fileName).then(() => {
-      this.initEpub()
+    const books = this.$route.params.fileName.split('|')
+    const fileName = books[1]
+    getLocalForage(fileName, (err, blob) => {
+      if (!err && blob) {
+        console.log('找到离线缓存电子书');
+        this.setFileName(books.join('/')).then(() => {
+          this.initEpub(blob)
+        })
+      } else {
+        console.log('在线获取电子书');
+        this.setFileName(books.join('/')).then(() => {
+          const url = process.env.VUE_APP_RES_URL + '/epub/' + this.fileName + '.epub'
+          this.initEpub(url)
+        })
+      }
     })
   }
 }

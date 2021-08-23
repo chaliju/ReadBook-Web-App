@@ -69,11 +69,27 @@ $ratio:375/10;
   align-items: flex-start;
 }
 
-@mixin columnCenter{
+@mixin columnCenter {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+@mixin scroll {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@mixin leftBottom{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
 }
 
 .icon {
