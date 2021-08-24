@@ -1,6 +1,6 @@
 <template>
   <div class="shelf-item-category">
-    <div class="shelf-item-categoru-list" v-if="data.itemList.length > 0">
+    <div class="shelf-item-category-list" v-if="data.itemList.length > 0">
       <div class="shelf-item-category-item" v-for="(item,index) in data.itemList" :key="index">
         <img class="shelf-item-category-img" :src="item.cover" />
       </div>
@@ -27,7 +27,7 @@ export default {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  .shelf-item-categoru-list {
+  .shelf-item-category-list {
     display: flex;
     flex-flow: row wrap;
     align-content: flex-start;

@@ -94,8 +94,7 @@ export function appendAddToShelf(list) {
 
 // 从书架中移除
 export function removeAddFromShelf(list) {
-  console.log(list);
-  return list.filter(item => item.type !== 3)
+    return list.filter(item => item.type !== 3)
 }
 
 export const flapCardList = [{
