@@ -49,6 +49,12 @@ export const storeShelfMixin = {
     showBookDetail(book) {
       gotoBookDetail(this, book)
     },
+    getCategoryList(title) {
+      this.getShelfList().then(() => {
+        const categoryList = this.shelfList.filter(book => book.type === 2 && book.title === title)[0]
+        this.setShelfCategory(categoryList)
+      })
+    },
     getShelfList() {
       let shelfList = getBookShelf()
       if (!shelfList) {
@@ -62,12 +68,6 @@ export const storeShelfMixin = {
       } else {
         return this.setShelfList(shelfList)
       }
-    },
-    getCategoryList(title) {
-      this.getShelfList().then(() => {
-        const categoryList = this.shelfList.filter(book => book.type === 2 && book.title === title)[0]
-        this.setShelfCategory(categoryList)
-      })
     },
     moveOutOfGroup(f) {
       // 过滤掉选中的书籍

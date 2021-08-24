@@ -26,7 +26,7 @@
     },
     computed: {
       item() {
-        return this.data.type === 1 ? this.book : (this.data.type === 2 ? this.category : this.dataadd)
+        return this.data.type === 1 ? this.book : (this.data.type === 2 ? this.category : this.add)
       }
     },
     data() {
