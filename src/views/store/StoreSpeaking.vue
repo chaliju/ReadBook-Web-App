@@ -10,12 +10,8 @@
       @onScroll="onScroll"
       ref="scroll"
     >
-      <book-info
-        :cover="cover"
-        :title="title"
-        :author="author"
-        :desc="desc"
-      ></book-info>
+      <book-info :cover="cover" :title="title" :author="author" :desc="desc">
+      </book-info>
       <div class="book-speak-title-wrapper">
         <div class="icon-speak-wrapper">
           <span class="icon-speak"></span>
@@ -105,9 +101,9 @@ import Epub from "epubjs";
 
 global.ePub = Epub;
 
-const APPID = "5b4da68b";
-const API_SECRET = "48487e25de82a2c167eccda30f7a3c70";
-const API_KEY = "7154170219e3e4426025afef812d070e";
+const APPID = "ec8950ac";
+const API_SECRET = "ZTE2ZGFhN2VjODRiNWE4NjJiNDcxNGI0";
+const API_KEY = "3bd0b49cdce8ed0a3b0c012350dd3b3d";
 let isChrome = navigator.userAgent.toLowerCase().match(/chrome/);
 let notSupportTip = isChrome
   ? "您的浏览器暂时不支持体验功能，请升级您的浏览器"
@@ -524,6 +520,7 @@ export default {
       //   this.isPlaying = true;
       //   this.playStatus = 1;
       // }
+
       const xmlhttp = new XMLHttpRequest();
       // 创建HTTP请求，同步接收结果
       xmlhttp.open(

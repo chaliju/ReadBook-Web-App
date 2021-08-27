@@ -10,7 +10,7 @@
             ref="scroll"
             v-if="ifShowList">
       <!-- 分类列表 -->
-      <shelf-list :top="42" data="shelfCategory.itemList"></shelf-list>
+      <shelf-list :top="42" :data="shelfCategory.itemList"></shelf-list>
     </scroll>
     <!-- 分类列表数据为空时展示内容 -->
     <div class="store-shelf-empty-view" v-else>

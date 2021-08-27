@@ -19,7 +19,7 @@ export function clearLocalStorage() {
 }
 
 export function saveBookShelf(shelf) {
-  return getLocalStorage('shelf', shelf)
+  return setLocalStorage('shelf', shelf)
 }
 
 export function getBookShelf() {
