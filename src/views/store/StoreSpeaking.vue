@@ -537,7 +537,7 @@ export default {
       if (xmlDoc) {
         // 解析响应内容
         const json = JSON.parse(xmlDoc);
-        // console.log(json);
+        console.log(json);
         if (json.path) {
           // path为语音合成生成的MP3文件下载路径，将该路径赋值audio.src
           // audio控件会自动加载音频文件
